@@ -42,7 +42,14 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+app.use(
+    cors({
+        origin: "*",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        maxAge: 3600,
+    })
+);
 
 app.use((req, res, next) => {
     const token = req.headers["authorization"];

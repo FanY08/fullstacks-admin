@@ -34,16 +34,16 @@ export const getProducts = async (req, res) => {
 };
 
 export const getCustomers = async (req, res) => {
-    const token = (req.headers["authorization"] || "").split(" ").pop();
+    // const token = (req.headers["authorization"] || "").split(" ").pop();
     try {
-        jwt.verify(token, secretKey, (err, decode) => {
-            if (err) {
-                res.status(403).json({
-                    message: "token out of date",
-                    data: [],
-                });
-            }
-        });
+        // jwt.verify(token, secretKey, (err, decode) => {
+        //     if (err) {
+        //         res.status(403).json({
+        //             message: "token out of date",
+        //             data: [],
+        //         });
+        //     }
+        // });
         const customers = await User.find({ role: "user" }).select("-password");
         res.status(200).json(customers);
     } catch (error) {
